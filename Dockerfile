@@ -1,11 +1,12 @@
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
 
-COPY build/libs/*.jar app.jar
+COPY app.jar /app/app.jar
 
 RUN mkdir -p /app/logs
+VOLUME ["/app/logs"]
 
 EXPOSE 8080
 
-ENTRYPOINT ["sh", "-c", "java -jar /app/app.jar > /app/logs/app.log 2>&1"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
